@@ -34,7 +34,7 @@ export default function Header() {
                         onClick={toggleMenu}
                         className="text-white text-3xl focus:outline-none"
                     >
-                        {isMenuOpen ? '✕' : '☰'} {/* Dấu '☰' là biểu tượng menu, '✕' là dấu đóng */}
+                        {isMenuOpen ? '✕' : '☰'}
                     </button>
                 </div>
 
@@ -70,7 +70,7 @@ export default function Header() {
             </div>
 
             {/* Menu mobile: khi kích thước màn hình nhỏ */}
-            <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-0 left-0 right-0 bg-black bg-opacity-60 z-40`}>
+            <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-0 left-0 right-0 bg-black bg-opacity-60 z-40 h-screen pt-32`}>
                 <ul className="flex flex-col space-y-6 text-lg font-medium text-white">
                     <li>
                         <Link href="/">

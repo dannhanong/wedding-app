@@ -11,7 +11,6 @@ export default function Home() {
       <FlowerEffect />
       {/* <Header /> */}
       <Hero />
-      {/* <About /> */}
       <Gallery />
       <Footer />
     </div>

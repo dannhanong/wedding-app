@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-gray-900 text-white py-6 text-center">
+        <footer className="bg-white text-white py-6 text-center">
             <div className="container mx-auto">
                 <p className="text-sm">&copy; 2024 Wedding All Rights Reserved.</p>
                 <p className="text-sm">

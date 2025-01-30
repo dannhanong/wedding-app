@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Sacramento } from 'next/font/google';
+import { motion } from "framer-motion";
 
 const sacramento = Sacramento({
     subsets: ['latin'],
@@ -39,29 +40,48 @@ const Countdown = () => {
     }, []);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/path-to-your-image.jpg)' }}>
+        <div 
+            className="flex flex-col items-center justify-center bg-cover bg-center" 
+            style={{ backgroundImage: 'url(/path-to-your-image.jpg)', height: '80vh' }}
+        >
             <h1 className={`${sacramento.className} text-7xl text-white`}>
                 Lê Thành & Lê Khuê
             </h1>
-            <p className="text-lg md:text-2xl text-white mb-8 mt-7 font-light">Cùng đếm ngược nào!</p>
+            <p className="text-lg md:text-2xl text-white mb-8 mt-7 font-light">Cách ngày cưới</p>
             {timeLeft ? (
-                <div className="flex space-x-4 text-center">
-                    <div className="bg-pink-500 text-white px-4 py-2 rounded-lg">
+                <div className="flex space-x-4 text-center w-22">
+                    <motion.div 
+                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ repeat: Infinity, duration: 2.0 }}
+                    >
                         <p className="text-3xl font-bold">{timeLeft.days}</p>
                         <span className="text-sm">Ngày</span>
-                    </div>
-                    <div className="bg-pink-500 text-white px-4 py-2 rounded-lg">
+                    </motion.div>
+                    <motion.div  
+                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ repeat: Infinity, duration: 2.0 }}
+                    >
                         <p className="text-3xl font-bold">{timeLeft.hours}</p>
                         <span className="text-sm">Giờ</span>
-                    </div>
-                    <div className="bg-pink-500 text-white px-4 py-2 rounded-lg">
+                    </motion.div>
+                    <motion.div  
+                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ repeat: Infinity, duration: 2.0 }}
+                    >
                         <p className="text-3xl font-bold">{timeLeft.minutes}</p>
                         <span className="text-sm">Phút</span>
-                    </div>
-                    <div className="bg-pink-500 text-white px-4 py-2 rounded-lg">
+                    </motion.div>
+                    <motion.div 
+                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ repeat: Infinity, duration: 2.0 }}
+                    >
                         <p className="text-3xl font-bold">{timeLeft.seconds}</p>
                         <span className="text-sm">Giây</span>
-                    </div>
+                    </motion.div>
                 </div>
             ) : (
                 <p className="text-2xl font-bold text-white mt-8">Hãy tận hưởng ngày tuyệt vời này!</p>
