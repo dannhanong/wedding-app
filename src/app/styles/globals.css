@@ -1,0 +1,53 @@
+/* globals.css */
+#falling-flowers {
+    position: fixed;
+    top: 0;
+    left: -10;
+    width: 100vw;   /* Đảm bảo chiều rộng toàn bộ màn hình */
+    height: 100vh;  /* Đảm bảo chiều cao toàn bộ màn hình */
+    pointer-events: none; /* Không ảnh hưởng đến thao tác người dùng */
+    z-index: 9999; /* Đảm bảo hiệu ứng ở trên tất cả các phần tử khác */
+}
+
+.flower {
+    position: absolute;
+    opacity: 0; /* Bắt đầu với độ trong suốt */
+    background-image: url('/images/flower.png');
+    background-size: cover;
+    animation: fall 5s ease-in-out infinite, sway 3s ease-in-out infinite, appear 0.5s ease-out forwards;
+    will-change: transform, opacity, scale;
+}
+
+/* Hiệu ứng hoa rơi */
+@keyframes fall {
+    0% {
+        transform: translateY(-10%) translateX(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh) translateX(calc(10vw - 5%));  /* Rơi chéo */
+        opacity: 0; /* Hoa phai dần */
+    }
+}
+
+/* Hiệu ứng nghiêng sang trái phải */
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+}
+
+/* Hiệu ứng xuất hiện mượt mà */
+@keyframes appear {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
