@@ -1,5 +1,8 @@
+"use client";
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const timelineData = [
     {
@@ -26,10 +29,29 @@ const timelineData = [
 ];
 
 const About = () => {
+    const [bowCount, setBowCount] = useState(0);
+
+    useEffect(() => {
+        const w = window.innerWidth;
+        const bc = Math.round(w / 30);
+        setBowCount(bc);
+    }, []);
+    
     return (
-        <div id="fh5co-couple-story" className="py-12 bg-gray-100">
+        <div id="fh5co-couple-story" className="py-6 bg-gray-100">
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
                 <div className="text-center mb-12">
+                    <div className='flex justify-center mb-10'>
+                        {[...Array(bowCount)].map((_, index) => (
+                            <Image
+                            key={index}
+                            src={"/images/bow1.gif"}
+                            alt="Bride"
+                            width={22}
+                            height={22}
+                            />
+                        ))}
+                    </div>
                     <span className="text-lg text-gray-500">We Love Each Other</span>
                     <h2 className="text-3xl font-bold text-gray-800">Our Story</h2>
                     <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
