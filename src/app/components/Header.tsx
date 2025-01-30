@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Sacramento } from 'next/font/google';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const sacramento = Sacramento({
     subsets: ['latin'],
@@ -12,6 +13,7 @@ const sacramento = Sacramento({
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // State quản lý trạng thái menu
+    const pathname = usePathname();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen); // Đảo trạng thái menu
@@ -22,7 +24,7 @@ export default function Header() {
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-xl font-bold">
                     <Link href="/">
-                        <span className={`${sacramento.className} text-6xl cursor-pointer text-pink-400 font-bold`}>
+                        <span className={`${sacramento.className} text-6xl cursor-pointer text-pink-500 font-bold`}>
                             Wedding
                         </span>
                     </Link>
@@ -43,24 +45,26 @@ export default function Header() {
                     {
                         !isMenuOpen && (
                             <ul className="flex space-x-6 text-lg font-medium">
-                                <li className="text-pink-400">
+                                <li className={pathname === '/' ? 'text-pink-400' : 'text-white'}>
                                     <Link href="/">
-                                        <span className="cursor-pointer hover:text-pink-400 text-white">Home</span>
+                                        <span className="cursor-pointer hover:text-pink-700">
+                                            Home
+                                        </span>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="/about">
-                                        <span className="cursor-pointer hover:text-pink-400 text-white">Story</span>
+                                <li className={pathname === '/stories' ? 'text-pink-400' : 'text-white'}>
+                                    <Link href="/stories">
+                                        <span className="cursor-pointer hover:text-pink-700">Story</span>
                                     </Link>
                                 </li>
-                                <li>
+                                <li className={pathname === '/gallery' ? 'text-pink-400' : 'text-white'}>
                                     <Link href="/gallery">
-                                        <span className="cursor-pointer hover:text-pink-400 text-white">Gallery</span>
+                                        <span className="cursor-pointer hover:text-pink-700">Gallery</span>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="/contact">
-                                        <span className="cursor-pointer hover:text-pink-400 text-white">Contact</span>
+                                <li className={pathname === '/wishes' ? 'text-pink-400' : 'text-white'}>
+                                    <Link href="/wishes">
+                                        <span className="cursor-pointer hover:text-pink-700">Wish</span>
                                     </Link>
                                 </li>
                             </ul>
@@ -72,24 +76,24 @@ export default function Header() {
             {/* Menu mobile: khi kích thước màn hình nhỏ */}
             <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-0 left-0 right-0 bg-black bg-opacity-60 z-40 h-screen pt-32`}>
                 <ul className="flex flex-col space-y-6 text-lg font-medium text-white">
-                    <li>
+                    <li className={pathname === '/' ? 'text-pink-400' : 'text-white'}>
                         <Link href="/">
-                            <span className="cursor-pointer hover:text-pink-400">Home</span>
+                            <span className="cursor-pointer hover:text-pink-700">Home</span>
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/about">
-                            <span className="cursor-pointer hover:text-pink-400">Story</span>
+                    <li className={pathname === '/stories' ? 'text-pink-400' : 'text-white'}>
+                        <Link href="/stories">
+                            <span className="cursor-pointer hover:text-pink-700">Story</span>
                         </Link>
                     </li>
-                    <li>
+                    <li className={pathname === '/gallery' ? 'text-pink-400' : 'text-white'}>
                         <Link href="/gallery">
-                            <span className="cursor-pointer hover:text-pink-400">Gallery</span>
+                            <span className="cursor-pointer hover:text-pink-700">Gallery</span>
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/contact">
-                            <span className="cursor-pointer hover:text-pink-400">Contact</span>
+                    <li className={pathname === '/wishes' ? 'text-pink-400' : 'text-white'}>
+                        <Link href="/wishes">
+                            <span className="cursor-pointer hover:text-pink-700">Wish</span>
                         </Link>
                     </li>
                 </ul>

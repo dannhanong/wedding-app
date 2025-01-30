@@ -2,31 +2,31 @@
 #falling-flowers {
     position: fixed;
     top: 0;
-    left: -10;
-    width: 100vw;   /* Đảm bảo chiều rộng toàn bộ màn hình */
-    height: 100vh;  /* Đảm bảo chiều cao toàn bộ màn hình */
-    pointer-events: none; /* Không ảnh hưởng đến thao tác người dùng */
-    z-index: 9999; /* Đảm bảo hiệu ứng ở trên tất cả các phần tử khác */
+    left: 0; /* Sửa từ -10 thành 0 */
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
 }
 
 .flower {
     position: absolute;
-    opacity: 0; /* Bắt đầu với độ trong suốt */
+    opacity: 0;
     background-image: url('/images/flower.png');
     background-size: cover;
     animation: fall 5s ease-in-out infinite, sway 3s ease-in-out infinite, appear 0.5s ease-out forwards;
-    will-change: transform, opacity, scale;
+    will-change: transform, opacity;
 }
 
-/* Hiệu ứng hoa rơi */
+/* Hoa rơi mượt mà và không thay đổi layout */
 @keyframes fall {
     0% {
         transform: translateY(-10%) translateX(0);
         opacity: 0.8;
     }
     100% {
-        transform: translateY(130vh) translateX(calc(10vw - 5%));  /* Rơi chéo */
-        opacity: 0; /* Hoa phai dần */
+        transform: translateY(calc(100vh + 60px)) translateX(calc(10vw - 5%));
+        opacity: 0;
     }
 }
 

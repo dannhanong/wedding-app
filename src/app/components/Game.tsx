@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Game() {
     const [noPosition, setNoPosition] = useState({ top: '50%', left: '50%' });
@@ -10,7 +11,7 @@ export default function Game() {
 
     const moveNoButton = () => {
         const newX = Math.random() * (window.innerWidth - 70);
-        const newY = Math.random() * (window.innerHeight - 30);
+        const newY = Math.random() * (window.innerHeight - 70);
         setNoPosition({ top: `${newY}px`, left: `${newX}px` });
     };
 
@@ -20,9 +21,13 @@ export default function Game() {
     }
 
     return (
-        <div 
+        <motion.div 
             className="flex flex-col items-center justify-center relative shadow-lg"
             style={{ height: '70vh' }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
         >
             <h1 className="text-2xl font-bold mb-6 text-pink-400">Bạn sẽ tham dự đám cưới chứ?</h1>
             <div className="flex gap-6">
@@ -53,7 +58,7 @@ export default function Game() {
                 </button>
             </div>
             {showDialog && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
                         <h2 className="text-xl font-bold mb-4 text-pink-400">Cảm ơn bạn đã xác nhận</h2>
                         <div className='flex justify-center'>
@@ -64,6 +69,7 @@ export default function Game() {
                                 height={0}
                                 sizes="50vh"
                                 style={{ width: '50%', height: '50%', objectFit: 'cover' }}
+                                className="object-contain"
                             />
                         </div>
                         <div className="flex justify-end mt-5">
@@ -77,6 +83,6 @@ export default function Game() {
                     </div>
                 </div>
             )}
-        </div>
+        </motion.div>
     );
 }

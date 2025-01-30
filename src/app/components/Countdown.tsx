@@ -44,8 +44,8 @@ const Countdown = () => {
             className="flex flex-col items-center justify-center bg-cover bg-center" 
             style={{ backgroundImage: 'url(/path-to-your-image.jpg)', height: '80vh' }}
         >
-            <h1 className={`${sacramento.className} text-7xl text-white`}>
-                Lê Thành & Lê Khuê
+            <h1 className={`${sacramento.className} text-6xl text-white`}>
+                Lê Thành & Minh Khuê
             </h1>
             <p className="text-lg md:text-2xl text-white mb-8 mt-7 font-light">Cách ngày cưới</p>
             {timeLeft ? (

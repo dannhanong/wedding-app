@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import "../styles/globals.css";
 
 const FlowerEffect = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);

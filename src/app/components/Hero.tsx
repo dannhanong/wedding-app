@@ -4,7 +4,7 @@ import Header from "./Header";
 export default function Hero() {
     return (
         <div
-            className="relative bg-cover bg-center h-screen text-center"
+            className="relative bg-cover bg-center text-center"
             style={{ backgroundImage: "url(/images/gallery-1.jpg)" }}
         >
             <Header />
