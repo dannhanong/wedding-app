@@ -34,7 +34,7 @@ export default function ScrollToTopButton() {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 p-3 bg-pink-400 text-white rounded-full shadow-lg hover:bg-pink-500 transition-all"
+        className="fixed bottom-6 right-6 p-3 bg-pink-400 text-white rounded-full shadow-lg hover:bg-pink-500 transition-all z-50"
       >
         ↑
       </button>

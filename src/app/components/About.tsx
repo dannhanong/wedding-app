@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Sacramento } from 'next/font/google';
+import { getAllStories } from '@/services/story';
 
 const sacramento = Sacramento({
     subsets: ['latin'],
@@ -11,37 +12,32 @@ const sacramento = Sacramento({
     style: 'normal'
 });
 
-const timelineData = [
-    {
-        title: "First We Meet",
-        date: "December 25, 2015",
-        image: "/images/couple-1.jpg",
-        description:
-            "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
-    },
-    {
-        title: "First Date",
-        date: "December 28, 2015",
-        image: "/images/couple-2.jpg",
-        description:
-            "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
-    },
-    {
-        title: "In A Relationship",
-        date: "January 1, 2016",
-        image: "/images/couple-3.jpg",
-        description:
-            "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
-    },
-];
+interface Story {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+}
 
 const About = () => {
     const [bowCount, setBowCount] = useState(0);
+    const [stories, setStories] = useState<Story[]>([]);
+
+    const fetchAllStories = async () => {
+      try {
+          const response = await getAllStories();
+          setStories(response.data);
+      } catch (error) {
+          console.error("Error during story fetch:", error);
+      }
+    };
 
     useEffect(() => {
         const w = window.innerWidth;
         const bc = Math.round(w / 30);
         setBowCount(bc);
+        fetchAllStories();
     }, []);
 
     return (
@@ -95,10 +91,10 @@ const About = () => {
                       Xin chào!
                     </h2>
                     <h3 className="text-gray-800 text-2xl mt-4">
-                      January 29th, 2026 Vietnam
+                      Vào ngày 29/01/2026 tại Quảng Ninh / Hải Phòng
                     </h3>
                     <p className="text-gray-600 mt-2">
-                      We invited you to celebrate our wedding
+                      Mời bạn đến dự lễ cưới của chúng tôi
                     </p>
                   </motion.div>
 
@@ -132,7 +128,7 @@ const About = () => {
                     </div>
 
                     <motion.div
-                      className="hidden md:flex items-center justify-center mx-6 text-3xl 
+                      className="md:flex items-center justify-center mx-6 text-3xl 
                                         text-pink-500 rounded-full bg-pink-50 p-1 mb-20"
                       animate={{ scale: [1, 1.5, 1] }}
                       transition={{ repeat: Infinity, duration: 2.3 }}
@@ -188,7 +184,7 @@ const About = () => {
           </div>
           <div className="relative">
             <ul className="timeline">
-              {timelineData.map((item, index) => (
+              {stories.map((item, index) => (
                 <motion.li
                   key={index}
                   className={`mb-8 flex flex-col md:flex-row items-center ${
@@ -201,7 +197,7 @@ const About = () => {
                 >
                   <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg">
                     <Image
-                      src={item.image}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/files/preview/${item.image}`}
                       alt={item.title}
                       width={96}
                       height={96}
@@ -213,7 +209,7 @@ const About = () => {
                       {item.title}
                     </h3>
                     <span className="text-gray-500 text-sm block mb-2">
-                      {item.date}
+                      {item.date.toLocaleString()}
                     </span>
                     <p className="text-gray-600">{item.description}</p>
                   </div>

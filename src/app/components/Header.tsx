@@ -21,7 +21,7 @@ export default function Header() {
 
     return (
         <nav className="bg-black bg-opacity-60 py-4 relative">
-            <div className="container mx-auto flex justify-between items-center">
+            <div className="container mx-auto flex justify-around items-center">
                 <div className="text-xl font-bold">
                     <Link href="/">
                         <span className={`${sacramento.className} text-6xl cursor-pointer text-pink-500 font-bold`}>

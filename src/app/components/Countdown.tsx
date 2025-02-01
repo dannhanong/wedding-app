@@ -49,37 +49,37 @@ const Countdown = () => {
             </h1>
             <p className="text-lg md:text-2xl text-white mb-8 mt-7 font-light">Cách ngày cưới</p>
             {timeLeft ? (
-                <div className="flex space-x-4 text-center w-22">
+                <div className="flex space-x-3 text-center w-22">
                     <motion.div 
-                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
-                        animate={{ scale: [1, 1.1, 1] }}
+                        className="bg-pink-500 text-white px-1 py-2 rounded-md w-20 h-20 pt-3"
+                        animate={{ scale: [1, 1.07, 1] }}
                         transition={{ repeat: Infinity, duration: 2.0 }}
                     >
-                        <p className="text-3xl font-bold">{timeLeft.days}</p>
+                        <p className="text-2xl font-bold">{timeLeft.days}</p>
                         <span className="text-sm">Ngày</span>
                     </motion.div>
                     <motion.div  
-                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
-                        animate={{ scale: [1, 1.1, 1] }}
+                        className="bg-pink-500 text-white px-1 py-2 rounded-md w-20 h-20 pt-3"
+                        animate={{ scale: [1, 1.07, 1] }}
                         transition={{ repeat: Infinity, duration: 2.0 }}
                     >
-                        <p className="text-3xl font-bold">{timeLeft.hours}</p>
+                        <p className="text-2xl font-bold">{timeLeft.hours}</p>
                         <span className="text-sm">Giờ</span>
                     </motion.div>
                     <motion.div  
-                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
-                        animate={{ scale: [1, 1.1, 1] }}
+                        className="bg-pink-500 text-white px-1 py-2 rounded-md w-20 h-20 pt-3"
+                        animate={{ scale: [1, 1.07, 1] }}
                         transition={{ repeat: Infinity, duration: 2.0 }}
                     >
-                        <p className="text-3xl font-bold">{timeLeft.minutes}</p>
+                        <p className="text-2xl font-bold">{timeLeft.minutes}</p>
                         <span className="text-sm">Phút</span>
                     </motion.div>
                     <motion.div 
-                        className="bg-pink-500 text-white px-4 py-2 rounded-lg w-20 h-22 pt-3"
-                        animate={{ scale: [1, 1.1, 1] }}
+                        className="bg-pink-500 text-white px-1 py-2 rounded-md w-20 h-20 pt-3"
+                        animate={{ scale: [1, 1.07, 1] }}
                         transition={{ repeat: Infinity, duration: 2.0 }}
                     >
-                        <p className="text-3xl font-bold">{timeLeft.seconds}</p>
+                        <p className="text-2xl font-bold">{timeLeft.seconds}</p>
                         <span className="text-sm">Giây</span>
                     </motion.div>
                 </div>
