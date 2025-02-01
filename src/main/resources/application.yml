@@ -2,3 +2,6 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://admin:newpass@dannhanong.0qmy0.mongodb.net/wedding?retryWrites=true&w=majority&appName=dannhanong&ssl=true&tlsAllowInvalidCertificates=true&tlsAllowInvalidHostnames=true
+      ssl:
+        enabled: true
+        invalid-hostname-allowed: true
