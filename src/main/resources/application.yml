@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:newpass@dannhanong.0qmy0.mongodb.net/wedding?retryWrites=true&w=majority&appName=dannhanong
