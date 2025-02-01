@@ -56,8 +56,7 @@ public class SecurityConfiguration {
                 CorsConfiguration corsConfig = new CorsConfiguration();
                 corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
                 corsConfig.addAllowedHeader("*");
-                corsConfig.addAllowedOriginPattern("https://idai.vn");
-                corsConfig.addAllowedOriginPattern("http://localhost:3000");
+                corsConfig.addAllowedOriginPattern("*");
                 return corsConfig;
             });
         });
