@@ -20,7 +20,7 @@ public class WishServiceImpl implements WishService {
     @Override
     public Wish create(Wish wish) {
         Wish w = wishRepository.save(wish);
-        simpMessagingTemplate.convertAndSend("/topic/wishes", w);
+        simpMessagingTemplate.convertAndSend("/topic/wishes", new ResponseMessage(200, "Có lời chúc mới"));
         return w;
     }
 

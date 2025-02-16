@@ -50,13 +50,15 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.PUT, Endpoints.PUBLIC_PUT_ENDPOINTS).permitAll()
                 .requestMatchers(HttpMethod.DELETE, Endpoints.PRIVATE_DELETE_ENDPOINTS).authenticated()
                 .requestMatchers(HttpMethod.POST, Endpoints.PRIVATE_POST_ENDPOINTS).authenticated()
+                .requestMatchers("/ws/**").permitAll()
         );
         http.cors(cors -> {
             cors.configurationSource(request -> {
                 CorsConfiguration corsConfig = new CorsConfiguration();
                 corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
                 corsConfig.addAllowedHeader("*");
-                corsConfig.addAllowedOriginPattern("*");
+                corsConfig.addAllowedOriginPattern("http://localhost:3000");
+                corsConfig.addAllowedOriginPattern("https://thanhkhue-wedding.vercel.app");
                 return corsConfig;
             });
         });
