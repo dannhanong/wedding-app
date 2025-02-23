@@ -2,15 +2,14 @@ package com.dan.wedding.services.impls;
 
 import com.dan.wedding.dtos.requests.StoryRequest;
 import com.dan.wedding.dtos.responses.ResponseMessage;
+import com.dan.wedding.http_clients.FileServiceClient;
 import com.dan.wedding.models.Story;
 import com.dan.wedding.repositories.StoryRepository;
-import com.dan.wedding.services.FileUploadService;
 import com.dan.wedding.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -18,7 +17,7 @@ public class StoryServiceImpl implements StoryService {
     @Autowired
     private StoryRepository storyRepository;
     @Autowired
-    private FileUploadService fileUploadService;
+    private FileServiceClient fileServiceClient;
 
     @Override
     public List<Story> getAll() {
@@ -32,9 +31,9 @@ public class StoryServiceImpl implements StoryService {
         story.setDate(storyRequest.getDate());
         story.setDescription(storyRequest.getDescription());
         try {
-            String fileCode = fileUploadService.uploadFile(storyRequest.getFile()).getFileCode();
+            String fileCode = fileServiceClient.uploadFile(storyRequest.getFile()).getFileCode();
             story.setImage(fileCode);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -52,11 +51,11 @@ public class StoryServiceImpl implements StoryService {
                     MultipartFile file = storyRequest.getFile();
                     if (file != null) {
                         try {
-                            String oldFileCode = story.getImage();
-                            String fileCode = fileUploadService.uploadFile(file).getFileCode();
+                            // String oldFileCode = story.getImage();
+                            String fileCode = fileServiceClient.uploadFile(file).getFileCode();
                             story.setImage(fileCode);
-                            fileUploadService.deleteFileByFileCode(oldFileCode);
-                        } catch (IOException e) {
+                            // fileUploadService.deleteFileByFileCode(oldFileCode);
+                        } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
                     }

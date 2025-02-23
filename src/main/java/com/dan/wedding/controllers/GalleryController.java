@@ -27,8 +27,8 @@ public class GalleryController {
         return ResponseEntity.ok(galleryService.findAll(pageable));
     }
 
-    @PostMapping("/private/create")
-    public ResponseEntity<Gallery> createPrivateGallery(@RequestParam MultipartFile file) {
+    @PostMapping(value = "/private/create")
+    public ResponseEntity<Gallery> createPrivateGallery(@RequestParam("file") MultipartFile file) {
         return ResponseEntity.ok(galleryService.create(file));
     }
 

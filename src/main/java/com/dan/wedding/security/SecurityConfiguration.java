@@ -51,6 +51,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.DELETE, Endpoints.PRIVATE_DELETE_ENDPOINTS).authenticated()
                 .requestMatchers(HttpMethod.POST, Endpoints.PRIVATE_POST_ENDPOINTS).authenticated()
                 .requestMatchers("/ws/**").permitAll()
+                .anyRequest().permitAll()
         );
         http.cors(cors -> {
             cors.configurationSource(request -> {

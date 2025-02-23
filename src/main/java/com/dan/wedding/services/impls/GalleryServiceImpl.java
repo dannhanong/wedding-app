@@ -1,6 +1,7 @@
 package com.dan.wedding.services.impls;
 
 import com.dan.wedding.dtos.responses.ResponseMessage;
+import com.dan.wedding.http_clients.FileServiceClient;
 import com.dan.wedding.models.Gallery;
 import com.dan.wedding.repositories.GalleryRepository;
 import com.dan.wedding.services.FileUploadService;
@@ -19,15 +20,17 @@ public class GalleryServiceImpl implements GalleryService {
     private GalleryRepository galleryRepository;
     @Autowired
     private FileUploadService fileUploadService;
+    @Autowired
+    private FileServiceClient fileServiceClient;
 
     @Override
     public Gallery create(MultipartFile file) {
         try {
-            String fileCode = fileUploadService.uploadFile(file).getFileCode();
+            String fileCode = fileServiceClient.uploadFile(file).getFileCode();
             Gallery gallery = new Gallery();
             gallery.setFileCode(fileCode);
             return galleryRepository.save(gallery);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
