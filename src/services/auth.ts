@@ -8,7 +8,11 @@ export const login = async (username: string, password: string) => {
             username,
             password
         });
-        localStorage.setItem('accessToken', response.data.accessToken);
+        
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('accessToken', response.data.accessToken);
+        }
+
         return response.data;
     } catch (error) {
         console.error('Error during login:', error);
@@ -17,9 +21,14 @@ export const login = async (username: string, password: string) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('accessToken');
+    if (typeof window !== 'undefined') {
+        localStorage.removeItem('accessToken');
+    }
 };
 
 export const isAuthenticated = () => {
-    return Boolean(localStorage.getItem('accessToken'));
+    if (typeof window !== 'undefined') {
+        return Boolean(localStorage.getItem('accessToken'));
+    }
+    return false; // Mặc định là chưa đăng nhập khi chạy trên server
 };

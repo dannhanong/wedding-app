@@ -43,7 +43,7 @@ export default function StoryManagement() {
             setTitle(story.title);
             setDate(story.date);
             setDescription(story.description);
-            setPreviewUrl(`${process.env.NEXT_PUBLIC_API_URL}/files/preview/${story.image}`);
+            setPreviewUrl(`${process.env.NEXT_PUBLIC_API_URL_FILE}/files/preview/${story.image}`);
         }
     }
 
@@ -162,7 +162,7 @@ export default function StoryManagement() {
                             <td className="border p-2 text-center">{index + 1}</td>
                             <td className="border p-2 flex justify-center items-center">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_URL}/files/preview/${story.image}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_URL_FILE}/files/preview/${story.image}`}
                                     alt={`story Image ${index + 1}`}
                                     width={150}
                                     height={150}

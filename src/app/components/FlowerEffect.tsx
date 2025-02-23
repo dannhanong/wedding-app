@@ -33,7 +33,7 @@ const FlowerEffect = () => {
       containerRef.current.appendChild(flower);
 
       // Xóa cánh hoa sau khi rơi
-      setTimeout(() => flower.remove(), duration * 1000);
+      setTimeout(() => flower.remove(), duration * 1100);
     };
 
     // Tạo hiệu ứng liên tục

@@ -1,9 +1,22 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Wish from "../components/Wish";
 
-export default function Home() {
+export default function Wishes() {
+  const aboutRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (aboutRef.current) {
+      aboutRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, []);
+
   return (
     <div>
-      <Wish />
+      <div ref={aboutRef}>
+        <Wish />
+      </div>
     </div>
   );
 }

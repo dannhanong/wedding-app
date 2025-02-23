@@ -7,9 +7,9 @@ import { Sacramento } from 'next/font/google';
 import { getAllStories } from '@/services/story';
 
 const sacramento = Sacramento({
-    subsets: ['latin'],
-    weight: '400',
-    style: 'normal'
+  subsets: ['latin'],
+  weight: '400',
+  style: 'normal',
 });
 
 interface Story {
@@ -21,205 +21,215 @@ interface Story {
 }
 
 const About = () => {
-    const [bowCount, setBowCount] = useState(0);
-    const [stories, setStories] = useState<Story[]>([]);
+  const [bowCount, setBowCount] = useState(0);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [hearts, setHearts] = useState<{ id: number; x: number }[]>([]);
 
-    const fetchAllStories = async () => {
-      try {
-          const response = await getAllStories();
-          setStories(response.data);
-      } catch (error) {
-          console.error("Error during story fetch:", error);
-      }
-    };
+  const addHearts = () => {
+    const newHearts = Array(5).fill(0).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+    }));
+    setHearts(newHearts);
+    setTimeout(() => setHearts([]), 3000);
+  };
 
-    useEffect(() => {
-        const w = window.innerWidth;
-        const bc = Math.round(w / 30);
-        setBowCount(bc);
-        fetchAllStories();
-    }, []);
+  const fetchAllStories = async () => {
+    try {
+      const response = await getAllStories();
+      setStories(response.data);
+    } catch (error) {
+      console.error("Error during story fetch:", error);
+    }
+  };
 
-    return (
-      <div id="fh5co-couple-story" className="py-6 bg-gray-100 text-gray-100">
-        <div className="container mx-auto px-6 md:px-12 lg:px-24">
-          <motion.li
-            id="fh5co-couple"
-            className="fh5co-section-gray"
+  useEffect(() => {
+    const w = window.innerWidth;
+    const bc = Math.round(w / 30);
+    setBowCount(bc);
+    fetchAllStories();
+  }, []);
+
+  return (
+    <div id="fh5co-couple-story" className="py-12 bg-gradient-to-b from-pink-50 to-yellow-50 text-gray-800">
+      <div className="container mx-auto px-6 md:px-12 lg:px-24">
+        {/* Section Giới thiệu cặp đôi */}
+        <motion.div
+          className="bg-white py-16 px-6 text-center shadow-lg rounded-lg"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="w-28 h-28 overflow-hidden border-4 border-pink-200 shadow-lg flex items-center justify-center mx-auto"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Image
+              src="/images/wedding_gif.gif"
+              alt="Wedding GIF"
+              width={96}
+              height={96}
+              className="object-cover"
+            />
+          </motion.div>
+
+          <h2 className={`${sacramento.className} text-5xl text-pink-600 font-bold mt-8`}>
+            Xin chào!
+          </h2>
+          <h3 className="text-gray-800 text-2xl mt-4">
+            Ngày 29/01/2026 tại Quảng Ninh / Hải Phòng
+          </h3>
+          <p className="text-gray-600 mt-2 italic">
+            Mời bạn đến chung vui ngày cưới của chúng tôi!
+          </p>
+
+          {/* Cặp đôi */}
+          <motion.div
+            className="flex flex-col md:flex-row items-center justify-center mt-10 gap-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="container">
-              <div className="row">
-                <div className="bg-gray-100 py-16 px-6 text-center shadow-lg rounded-lg">
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                  >
-                    <style jsx>{`
-                      @keyframes flip {
-                        0% {
-                          transform: rotateY(0deg);
-                        }
-                        50% {
-                          transform: rotateY(180deg);
-                        }
-                        100% {
-                          transform: rotateY(360deg);
-                        }
-                      }
-                    `}</style>
-
-                    <div className="w-28 h-28 overflow-hidden border-4 border-white shadow-lg flex items-center justify-center mx-auto">
-                      <Image
-                        src={"/images/wedding_gif.gif"}
-                        alt={"gif"}
-                        width={96}
-                        height={96}
-                        className="object-cover"
-                        style={{ animation: "flip 60s infinite linear" }}
-                      />
-                    </div>
-
-                    <h2
-                      className={`text-pink-600 text-5xl font-bold pt-16 ${sacramento.className}`}
-                    >
-                      Xin chào!
-                    </h2>
-                    <h3 className="text-gray-800 text-2xl mt-4">
-                      Vào ngày 29/01/2026 tại Quảng Ninh / Hải Phòng
-                    </h3>
-                    <p className="text-gray-600 mt-2">
-                      Mời bạn đến dự lễ cưới của chúng tôi
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    className="flex flex-col md:flex-row items-center justify-center mt-10"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                  >
-                    <div className="md:w-1/2 py-4 text-right">
-                      <div className="w-40 h-40 ml-auto relative">
-                        <Image
-                          src="/images/gallery-1.jpg"
-                          alt="Groom"
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <h2
-                        className={`text-pink-500 text-2xl font-semibold mt-4 ${sacramento.className}`}
-                      >
-                        Lê Thành
-                      </h2>
-                      <p className="text-gray-600 mt-2">
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove
-                      </p>
-                    </div>
-
-                    <motion.div
-                      className="md:flex items-center justify-center mx-6 text-3xl 
-                                        text-pink-500 rounded-full bg-pink-50 p-1 mb-20"
-                      animate={{ scale: [1, 1.5, 1] }}
-                      transition={{ repeat: Infinity, duration: 2.3 }}
-                    >
-                      ❤️
-                    </motion.div>
-
-                    <div className="md:w-1/2 py-4 text-left">
-                      <div className="w-40 h-40 mr-auto relative">
-                        <Image
-                          src="/images/gallery-1.jpg"
-                          alt="Bride"
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <h2
-                        className={`text-pink-500 text-2xl font-semibold mt-4 ${sacramento.className}`}
-                      >
-                        Minh Khuê
-                      </h2>
-                      <p className="text-gray-600 mt-2">
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove
-                      </p>
-                    </div>
-                  </motion.div>
+            <div className="md:w-1/2 py-4 text-right">
+              <motion.div
+                className="w-40 h-40 mx-auto relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className='flex justify-end'>
+                  <Image
+                    src="/images/gallery-1.jpg"
+                    alt="Groom"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full border-4 border-yellow-300"
+                  />
                 </div>
-              </div>
+              </motion.div>
+              <h2 className={`${sacramento.className} text-3xl text-pink-500 mt-4`}>
+                Lê Thành
+              </h2>
+              <p className="text-gray-600 mt-2 max-w-sm mx-auto">
+                Một chàng trai yêu sự tự do, luôn tìm kiếm vẻ đẹp trong từng khoảnh khắc bên người mình yêu.
+              </p>
             </div>
-          </motion.li>
-          <div className="text-center mb-12">
-            <div className="flex justify-center my-10">
-              {[...Array(bowCount)].map((_, index) => (
+
+            <motion.div
+              className="text-4xl text-pink-500 bg-pink-100 rounded-full p-3"
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              ❤️
+            </motion.div>
+
+            <div className="md:w-1/2 py-4 text-left">
+              <motion.div
+                className="w-40 h-40 mx-auto relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
-                  key={index}
-                  src={"/images/bow1.gif"}
+                  src="/images/gallery-1.jpg"
                   alt="Bride"
-                  width={22}
-                  height={22}
-                  className="object-contain"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full border-4 border-pink-300"
                 />
-              ))}
+              </motion.div>
+              <h2 className={`${sacramento.className} text-3xl text-pink-500 mt-4`}>
+                Minh Khuê
+              </h2>
+              <p className="text-gray-600 mt-2 max-w-sm mx-auto">
+                Một cô gái dịu dàng, luôn mang đến ánh sáng và niềm vui cho những người xung quanh.
+              </p>
             </div>
-            <span className="text-lg text-gray-500">We Love Each Other</span>
-            <h2 className="text-3xl font-bold text-gray-800">Our Story</h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Far far away, behind the word mountains, far from the countries
-              Vokalia and Consonantia, there live the blind texts.
-            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Section Our Story */}
+        <div className="text-center mt-16">
+          <div className="flex justify-center my-10">
+            {[...Array(bowCount)].map((_, index) => (
+              <motion.img
+                key={index}
+                src="/images/bow1.gif"
+                alt="Bow"
+                width={22}
+                height={22}
+                className="object-contain"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 3 }}
+              />
+            ))}
           </div>
-          <div className="relative">
-            <ul className="timeline">
-              {stories.map((item, index) => (
-                <motion.li
-                  key={index}
-                  className={`mb-8 flex flex-col md:flex-row items-center ${
-                    index % 2 !== 0 ? "md:flex-row-reverse" : ""
+          <span className={`${sacramento.className} text-2xl text-pink-500`}>
+            We Love Each Other
+          </span>
+          <h2 className={`${sacramento.className} text-4xl text-gray-800 mt-2`}>
+            Our Story
+          </h2>
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto italic">
+            Hành trình của chúng tôi bắt đầu từ những điều giản dị, và giờ đây, chúng tôi cùng nhau viết nên một câu chuyện tình yêu.
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className="relative mt-12" onMouseEnter={addHearts}>
+          {hearts.map((heart) => (
+            <motion.div
+              key={heart.id}
+              className="absolute text-2xl text-pink-500"
+              style={{ top: 0, left: `${heart.x}%` }}
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 0, y: 200 }}
+              transition={{ duration: 3 }}
+            >
+              ♥
+            </motion.div>
+          ))}
+          <ul className="timeline">
+            {stories.map((item, index) => (
+              <motion.li
+                key={index}
+                className={`mb-12 flex flex-col md:flex-row items-center ${index % 2 !== 0 ? "md:flex-row-reverse" : ""
                   }`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <motion.div
+                  className="w-24 h-24 rounded-full overflow-hidden border-4 border-pink-200 shadow-lg"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/files/preview/${item.image}`}
-                      alt={item.title}
-                      width={96}
-                      height={96}
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="bg-white shadow-md rounded-lg p-6 max-w-md md:ml-6 md:mr-6">
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {item.title}
-                    </h3>
-                    <span className="text-gray-500 text-sm block mb-2">
-                      {item.date.toLocaleString()}
-                    </span>
-                    <p className="text-gray-600">{item.description}</p>
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_API_URL_FILE}/files/preview/${item.image}`}
+                    alt={item.title}
+                    width={96}
+                    height={96}
+                    className="object-cover"
+                  />
+                </motion.div>
+                <div className="bg-gradient-to-r from-pink-100 to-yellow-100 shadow-md rounded-lg p-6 max-w-md md:ml-6 md:mr-6">
+                  <h3 className={`${sacramento.className} text-2xl text-pink-600`}>
+                    {item.title}
+                  </h3>
+                  <span className="text-gray-500 text-sm block mb-2">
+                    {new Date(item.date).toLocaleDateString('vi-VN')}
+                  </span>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default About;

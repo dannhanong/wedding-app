@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Sacramento } from 'next/font/google';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const sacramento = Sacramento({
     subsets: ['latin'],
@@ -20,24 +21,55 @@ export default function Header() {
     };
 
     return (
-        <nav className="bg-black bg-opacity-60 py-4 relative">
+        <nav 
+            className="bg-black bg-opacity-60 py-4 relative"
+            style={{ height: '20vh' }}
+        >
             <div className="container mx-auto flex justify-around items-center">
-                <div className="text-xl font-bold">
+            <motion.div
+                    className="text-xl font-bold relative"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
                     <Link href="/">
-                        <span className={`${sacramento.className} text-6xl cursor-pointer text-pink-500 font-bold`}>
+                        <span
+                            className={`${sacramento.className} text-6xl cursor-pointer text-pink-400 font-bold`}
+                        >
                             Wedding
                         </span>
                     </Link>
-                </div>
+                    {/* Hiệu ứng hạt sáng quanh logo */}
+                    {Array(5)
+                        .fill(0)
+                        .map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="absolute w-2 h-2 bg-pink-300 rounded-full opacity-50"
+                                style={{
+                                    top: `${Math.random() * 100 - 50}%`,
+                                    left: `${Math.random() * 100 - 50}%`,
+                                }}
+                                animate={{ y: [-10, 10, -10], opacity: [0, 1, 0] }}
+                                transition={{
+                                    repeat: Infinity,
+                                    duration: 2,
+                                    delay: i * 0.3,
+                                }}
+                            />
+                        ))}
+                </motion.div>
 
-                {/* Menu toggle cho thiết bị di động */}
-                <div className="lg:hidden absolute top-4 right-4 z-50"> {/* Thêm z-50 cho nút toggle */}
-                    <button
+                {/* Nút toggle cho mobile */}
+                <div className="lg:hidden absolute top-4 right-4 z-50">
+                    <motion.button
                         onClick={toggleMenu}
                         className="text-white text-3xl focus:outline-none"
+                        whileHover={{ scale: 1.2, rotate: 90 }}
+                        transition={{ duration: 0.3 }}
                     >
-                        {isMenuOpen ? '✕' : '☰'}
-                    </button>
+                        {isMenuOpen ? "✕" : "☰"}
+                    </motion.button>
                 </div>
 
                 {/* Menu chính cho các thiết bị lớn */}
@@ -48,23 +80,23 @@ export default function Header() {
                                 <li className={pathname === '/' ? 'text-pink-400' : 'text-white'}>
                                     <Link href="/">
                                         <span className="cursor-pointer hover:text-pink-700">
-                                            Home
+                                            Trang chủ
                                         </span>
                                     </Link>
                                 </li>
                                 <li className={pathname === '/stories' ? 'text-pink-400' : 'text-white'}>
                                     <Link href="/stories">
-                                        <span className="cursor-pointer hover:text-pink-700">Story</span>
+                                        <span className="cursor-pointer hover:text-pink-700">Câu chuyện</span>
                                     </Link>
                                 </li>
                                 <li className={pathname === '/gallery' ? 'text-pink-400' : 'text-white'}>
                                     <Link href="/gallery">
-                                        <span className="cursor-pointer hover:text-pink-700">Gallery</span>
+                                        <span className="cursor-pointer hover:text-pink-700">Trưng bày</span>
                                     </Link>
                                 </li>
                                 <li className={pathname === '/wishes' ? 'text-pink-400' : 'text-white'}>
                                     <Link href="/wishes">
-                                        <span className="cursor-pointer hover:text-pink-700">Wish</span>
+                                        <span className="cursor-pointer hover:text-pink-700">Lời chúc</span>
                                     </Link>
                                 </li>
                             </ul>
@@ -78,22 +110,22 @@ export default function Header() {
                 <ul className="flex flex-col space-y-6 text-lg font-medium text-white">
                     <li className={pathname === '/' ? 'text-pink-400' : 'text-white'}>
                         <Link href="/">
-                            <span className="cursor-pointer hover:text-pink-700">Home</span>
+                            <span className="cursor-pointer hover:text-pink-700">Trang chủ</span>
                         </Link>
                     </li>
                     <li className={pathname === '/stories' ? 'text-pink-400' : 'text-white'}>
                         <Link href="/stories">
-                            <span className="cursor-pointer hover:text-pink-700">Story</span>
+                            <span className="cursor-pointer hover:text-pink-700">Câu chuyện</span>
                         </Link>
                     </li>
                     <li className={pathname === '/gallery' ? 'text-pink-400' : 'text-white'}>
                         <Link href="/gallery">
-                            <span className="cursor-pointer hover:text-pink-700">Gallery</span>
+                            <span className="cursor-pointer hover:text-pink-700">Trưng bày</span>
                         </Link>
                     </li>
                     <li className={pathname === '/wishes' ? 'text-pink-400' : 'text-white'}>
                         <Link href="/wishes">
-                            <span className="cursor-pointer hover:text-pink-700">Wish</span>
+                            <span className="cursor-pointer hover:text-pink-700">Lời chúc</span>
                         </Link>
                     </li>
                 </ul>

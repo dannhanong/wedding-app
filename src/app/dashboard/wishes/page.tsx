@@ -18,7 +18,7 @@ export default function WishManagement() {
     const fetchAllWishes = async () => {
         try {
             const response = await getAllWishes();
-            setWishes(response.data);
+            setWishes(response);
         } catch (error) {
             console.error("Error during wish fetch:", error);
         }

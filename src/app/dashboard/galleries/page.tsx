@@ -1,13 +1,6 @@
-import dynamic from "next/dynamic";
+import GalleryManagement from "./GalleryManagement";
 
-const GalleryManagement = dynamic(
-    () => import("./GalleryManagement"), 
-    {
-    ssr: false,
-    }
-);
-
-export default function GalleryManagementPage() {
+export default function Home() {
   return (
     <div>
         <GalleryManagement />

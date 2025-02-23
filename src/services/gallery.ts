@@ -2,15 +2,23 @@ import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
+const getAccessToken = () => {
+    if (typeof window !== 'undefined') {
+        return localStorage.getItem('accessToken');
+    }
+    return null;
+};
+
 export const createGallery = async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);
     try {
+        const token = getAccessToken();
         const response = await axios.post(`${baseUrl}/galleries/private/create`, formData, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                'Content-Type': 'multipart/form-data'
-            }
+                Authorization: token ? `Bearer ${token}` : '', // Thêm kiểm tra null
+                'Content-Type': 'multipart/form-data',
+            },
         });
         return response.data;
     } catch (error) {
@@ -21,14 +29,15 @@ export const createGallery = async (file: File) => {
 
 export const deleteGallery = async (id: string) => {
     try {
+        const token = getAccessToken();
         const response = await axios.delete(`${baseUrl}/galleries/private/delete/${id}`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
+                Authorization: token ? `Bearer ${token}` : '', // Thêm kiểm tra null
+            },
         });
         return response.data;
     } catch (error) {
-        console.error('Error during gallery creation:', error);
+        console.error('Error during gallery deletion:', error);
         throw error;
     }
 };

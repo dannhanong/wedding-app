@@ -112,20 +112,23 @@ export default function GalleryManagement() {
                 </thead>
                 <tbody>
                     {galleries.map((gallery, index) => (
-                        <tr key={gallery.id} className="bg-white hover:bg-gray-100">
-                            <td className="border p-2 text-center">{(index + 1) + currentPage * currentSize}</td>
-                            <td className="border p-2 flex justify-center items-center">
+                        <tr 
+                            key={gallery.id} 
+                            className="bg-white hover:bg-gray-100"
+                            style={{ minHeight: '300px' }}
+                        >
+                            <td className="min-h-40 border p-2 text-center">{(index + 1) + currentPage * currentSize}</td>
+                            <td className="min-h-40 border p-2 flex justify-center items-center">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_URL}/files/preview/${gallery.fileCode}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_URL_FILE}/files/preview/${gallery.fileCode}`}
                                     alt={`Gallery Image ${index + 1}`}
-                                    width={150}
-                                    height={150}
+                                    width={330}
+                                    height={330}
                                     className="rounded-lg shadow-md object-contain bg-pink-50"
                                 />
                             </td>
-                            <td className="border p-2 text-center">
+                            <td className="min-h-40 border p-2 text-center">
                                 <div className="flex justify-center items-center space-x-3">
-                                    {/* <CiEdit size={25} className='cursor-pointer' color='blue' onClick={() => router.push(`/dashboard/update/${gallery.id}`)} /> */}
                                     <MdDeleteForever size={25} className='cursor-pointer' color='red' onClick={() => handleDelete(gallery.id)} />
                                 </div>
                             </td>

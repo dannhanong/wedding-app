@@ -83,17 +83,17 @@ export default function Sidebar({ onToggle }: SidebarProps) {
                             </li>
                             <li>
                                 <Link href="/dashboard/galleries" className="flex items-center px-4 py-2 hover:bg-gray-700 rounded">
-                                    <TbReportAnalytics className="mr-2" /> Gallery
+                                    <TbReportAnalytics className="mr-2" /> Trưng bày
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/dashboard/stories" className="flex items-center px-4 py-2 hover:bg-gray-700 rounded">
-                                    <MdOutlineHistoryEdu className="mr-2" /> Story
+                                    <MdOutlineHistoryEdu className="mr-2" /> Câu chuyện
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/dashboard/wishes" className="flex items-center px-4 py-2 hover:bg-gray-700 rounded">
-                                    <SiWish className="mr-2" /> Wish
+                                    <SiWish className="mr-2" /> Lời chúc
                                 </Link>
                             </li>
                             <li>
@@ -101,7 +101,7 @@ export default function Sidebar({ onToggle }: SidebarProps) {
                                     className="flex items-center px-4 py-2 hover:bg-gray-700 rounded hover:cursor-pointer"
                                     onClick={handleLogout}
                                 >
-                                    <CiLogout className="mr-2" /> Logout
+                                    <CiLogout className="mr-2" /> Đăng xuất
                                 </div>
                             </li>
                         </ul>
