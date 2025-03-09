@@ -2,7 +2,8 @@ import os
 import re
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
-from langchain_huggingface import HuggingFaceEmbeddings
+# from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceHubEmbeddings
 from langchain_community.vectorstores import Qdrant
 from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
@@ -19,6 +20,9 @@ from pydantic import BaseModel
 import sqlite3
 from uuid import uuid4
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Khởi tạo FastAPI app
 app = FastAPI(title="Character AI Chatbot API")
@@ -32,10 +36,15 @@ app.add_middleware(
 )
 
 # Khởi tạo API Key của OpenRouter
-os.environ["OPENROUTER_API_KEY"] = "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"
+openrouter_api_key = os.environ.get("OPENROUTER_API_KEY", "")
+# Khởi tạo API Key của HuggingFace
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.environ.get("HUGGINGFACE_API_KEY", "")
 
 # Thay OpenAIEmbeddings bằng HuggingFaceEmbeddings (miễn phí, chạy cục bộ)
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+# embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+embeddings = HuggingFaceHubEmbeddings(
+    model="sentence-transformers/all-MiniLM-L6-v2"
+)
 
 # Kết nối đến Qdrant
 # qdrant_client = QdrantClient(
@@ -218,7 +227,7 @@ async def chat_with_bot(request: ChatRequest):
     
     # Cấu hình ChatOpenAI để dùng OpenRouter
     llm = ChatOpenAI(
-        openai_api_key=os.environ["OPENROUTER_API_KEY"],
+        openai_api_key=openrouter_api_key,
         openai_api_base="https://openrouter.ai/api/v1",
         model_name="nvidia/llama-3.1-nemotron-70b-instruct:free",
         temperature=0

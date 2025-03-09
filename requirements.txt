@@ -9,4 +9,6 @@ uvicorn
 torch
 sentence-transformers
 langchain-huggingface
+huggingface-hub
 python-multipart
+python-dotenv
