@@ -125,6 +125,10 @@ def extract_text_from_file(file_path):
         return "Định dạng file không hỗ trợ!"
     return text
 
+@app.get("/test")
+async def test():
+    return {"message": "API is running!"}
+
 # Hàm xử lý file upload (chuyển sang FastAPI)
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
