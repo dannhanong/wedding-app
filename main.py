@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from langchain_community.embeddings import HuggingFaceHubEmbeddings
 from langchain_community.vectorstores import Qdrant
 from langchain.chains import RetrievalQA
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 from qdrant_client import QdrantClient
 import PyPDF2
@@ -52,8 +53,8 @@ embeddings = HuggingFaceHubEmbeddings(
 #     port=6333
 # )
 qdrant_client = QdrantClient(
-    url="https://03a47f75-7bd1-458b-b16e-8c9e5400ea07.us-east4-0.gcp.cloud.qdrant.io",
-    api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.U0XZ1l9Mfzv0VkaRlymPRg3M6lx-eLNDwEexAiq1iuw",
+    url="https://46cfbe6c-39e3-4932-9c35-f785698fbdd3.us-west-2-0.aws.cloud.qdrant.io",
+    api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0._vpwH9FFClLO1JH-Cp4RwD7anj769IL4rM58VmPXVj0",
 )
 
 collection_name = "chatbot_documents"
@@ -230,10 +231,16 @@ async def chat_with_bot(request: ChatRequest):
     )
     
     # Cấu hình ChatOpenAI để dùng OpenRouter
-    llm = ChatOpenAI(
-        openai_api_key=openrouter_api_key,
-        openai_api_base="https://openrouter.ai/api/v1",
-        model_name="nvidia/llama-3.1-nemotron-70b-instruct:free",
+    # llm = ChatOpenAI(
+    #     openai_api_key=openrouter_api_key,
+    #     openai_api_base="https://openrouter.ai/api/v1",
+    #     model_name="nvidia/llama-3.1-nemotron-70b-instruct:free",
+    #     temperature=0
+    # )
+
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-1.5-pro",
+        google_api_key=os.environ.get("GOOGLE_API_KEY", ""),
         temperature=0
     )
     
