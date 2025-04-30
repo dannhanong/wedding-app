@@ -128,7 +128,7 @@ def extract_text_from_file(file_path):
 
 @app.get("/test")
 async def test():
-    return {"message": "API is running!"}
+    return {"message": "API v2 is running!"}
 
 # Hàm xử lý file upload (chuyển sang FastAPI)
 @app.post("/upload")
