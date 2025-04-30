@@ -130,6 +130,15 @@ def extract_text_from_file(file_path):
 async def test():
     return {"message": "API v2 is running!"}
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Koyeb"""
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "version": "1.0.0"
+    }
+
 # Hàm xử lý file upload (chuyển sang FastAPI)
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
