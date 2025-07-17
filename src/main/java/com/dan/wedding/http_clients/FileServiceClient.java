@@ -25,7 +25,7 @@ public class FileServiceClient {
 
     @PostConstruct
     public void init() {
-        this.webClient = webClientBuilder.baseUrl("https://wedding-file.onrender.com").build();
+        this.webClient = webClientBuilder.baseUrl("https://wedding-file-vtji.onrender.com").build();
     }
 
     public FileUploadResponse uploadFile(MultipartFile file) {
