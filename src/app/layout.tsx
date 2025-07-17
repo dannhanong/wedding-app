@@ -3,9 +3,10 @@ import "./globals.css";
 import Hero from "./components/Hero";
 import FlowerEffect from "./components/FlowerEffect";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import Chatbot from "./components/ChatbotButton";
 
 export const metadata: Metadata = {
-  title: "Wedding - Next.js",
+  title: "Lê Thành & Minh Khuê",
   description: "A beautiful wedding website built with Next.js",
 };
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <Hero />
         {children}
         <ScrollToTopButton />
+        <Chatbot />
       </body>
     </html>
   );

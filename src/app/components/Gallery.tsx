@@ -39,6 +39,14 @@ export default function Gallery() {
         fetchAll(currentSize);
     }, [currentSize]);
 
+    // Các màu viền nhấp nháy
+    const borderColors = [
+        "border-pink-200", 
+        "border-pink-300", 
+        "border-yellow-200", 
+        "border-pink-400"
+    ];
+
     return (
         <section className="py-12 bg-gradient-to-b from-pink-50 to-yellow-50">
             {!isLoading ? (
@@ -70,19 +78,39 @@ export default function Gallery() {
                                     delay: Math.floor(index / 3) * 0.3,
                                 }}
                             >
-                                <motion.div
-                                    className="relative rounded-lg shadow-md overflow-hidden border-4 border-pink-200 bg-pink-50"
-                                    whileHover={{ scale: 1.05, rotate: 2 }}
-                                    transition={{ duration: 0.3 }}
+                                {/* Khung ngoài với hiệu ứng nhấp nháy */}
+                                <motion.div 
+                                    className="p-1 rounded-lg overflow-hidden relative"
+                                    animate={{ 
+                                        boxShadow: [
+                                            "0 0 3px rgba(255, 182, 193, 0.5)",
+                                            "0 0 8px rgba(255, 182, 193, 0.8)",
+                                            "0 0 3px rgba(255, 182, 193, 0.5)"
+                                        ],
+                                        borderColor: borderColors
+                                    }}
+                                    transition={{ 
+                                        duration: 3,
+                                        repeat: Infinity,
+                                        repeatType: "mirror",
+                                        ease: "easeInOut",
+                                        delay: index * 0.2 // Delay khác nhau cho mỗi khung hình
+                                    }}
                                 >
-                                    <Image
-                                        src={`${process.env.NEXT_PUBLIC_API_URL_FILE}/files/preview/${gallery.fileCode}`}
-                                        alt={`Gallery Image ${index + 1}`}
-                                        width={400}
-                                        height={370}
-                                        style={{ minHeight: 370 }}
-                                        className="object-cover"
-                                    />
+                                    <motion.div
+                                        className="relative rounded-lg shadow-md overflow-hidden border-4 border-pink-200 bg-pink-50"
+                                        whileHover={{ scale: 1.05 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_API_URL_FILE}/files/preview/${gallery.fileCode}`}
+                                            alt={`Gallery Image ${index + 1}`}
+                                            width={400}
+                                            height={370}
+                                            style={{ minHeight: 370 }}
+                                            className="object-cover"
+                                        />
+                                    </motion.div>
                                 </motion.div>
                             </motion.div>
                         ))}

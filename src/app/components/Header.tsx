@@ -22,8 +22,7 @@ export default function Header() {
 
     return (
         <nav 
-            className="bg-black bg-opacity-60 py-4 relative"
-            style={{ height: '20vh' }}
+            className="bg-black bg-opacity-60 py-4 relative h-[10vh] lg:h-[20vh]"
         >
             <div className="container mx-auto flex justify-around items-center">
             <motion.div

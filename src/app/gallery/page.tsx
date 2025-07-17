@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Gallery from "../components/Gallery";
+import GalleryUpdate from "../components/GalleryUpdate";
 
 export default function Galleries() {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -15,7 +16,7 @@ export default function Galleries() {
   return (
     <div>
       <div ref={aboutRef}>
-        <Gallery />
+        <GalleryUpdate />
       </div>
     </div>
   );

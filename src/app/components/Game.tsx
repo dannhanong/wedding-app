@@ -12,7 +12,7 @@ const sacramento = Sacramento({
 });
 
 export default function Game() {
-    const [noPosition, setNoPosition] = useState({ top: "50%", left: "50%" });
+    const [noPosition, setNoPosition] = useState({ top: "0%", left: "100%" });
     const [showDialog, setShowDialog] = useState(false);
     const [selected, setSelected] = useState(false);
     const [hearts, setHearts] = useState<{ id: number; x: number }[]>([]);
@@ -58,10 +58,11 @@ export default function Game() {
             </motion.h1>
 
             {/* Nút */}
-            <div className="flex gap-6 relative">
+            <div className="flex gap-6 relative mr-24">
                 {selected ? (
                     <motion.button
                         className="px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-full shadow-lg text-lg cursor-not-allowed"
+                        style={{ marginRight: '100%' }}
                         disabled
                         initial={{ scale: 1 }}
                         animate={{ scale: [1, 1.1, 1] }}
@@ -72,6 +73,7 @@ export default function Game() {
                 ) : (
                     <motion.button
                         className="px-6 py-3 bg-gradient-to-r from-green-400 to-yellow-300 text-white rounded-full shadow-lg text-lg"
+                        style={{ marginRight: '100%' }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={handleClickYes}
@@ -83,6 +85,7 @@ export default function Game() {
                     className="px-6 py-3 bg-gradient-to-r from-red-400 to-pink-300 text-white rounded-full shadow-lg text-lg absolute transition-all duration-500 ease-in-out"
                     style={{ top: noPosition.top, left: noPosition.left }}
                     whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onMouseEnter={moveNoButton}
                     onClick={moveNoButton}
                 >
