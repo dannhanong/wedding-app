@@ -43,11 +43,11 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     public ResponseMessage delete(String id) {
         return galleryRepository.findById(id).map(gallery -> {
-            try {
-                fileUploadService.deleteFileByFileCode(gallery.getFileCode());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            // try {
+            //     fileUploadService.deleteFileByFileCode(gallery.getFileCode());
+            // } catch (IOException e) {
+            //     throw new RuntimeException(e);
+            // }
             galleryRepository.delete(gallery);
             return new ResponseMessage(200, "Xóa ảnh thành công");
         }).orElseThrow(() -> new RuntimeException("Không tìm thấy ảnh"));
